@@ -33,7 +33,6 @@ def main(filename):
 		url=url[:-1]
 		print(url)
 		driver.get(url)
-		WebDriverWait(driver, timeout=10).until(lambda x: x.find_elements_by_tag_name('body'))
 		saveScreenshot(driver,url)
 	driver.quit()
 if __name__=="__main__":
