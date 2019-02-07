@@ -6,6 +6,7 @@ import re
 import string
 import sys
 import unidecode
+import traceback
 from bs4 import BeautifulSoup
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
@@ -20,20 +21,27 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.support.ui import WebDriverWait
+
 def saveScreenshot(driver,url):
 	imgName=url.split('//')[1].split('/')[0]
 	driver.save_screenshot('/home/abhiavk/git/Visual-Complexity-and-Colourfullness/Training/IndiaGov/'+imgName+'.png')
 def main(filename):
 	options 	= Options()
 	options.add_argument("--headless")
-	driver		= webdriver.Chrome(chrome_options=options)
-	driver.set_window_size(1024,768)
+
 	urls		=open(filename,"r")
 	for url in urls:
-		url=url[:-1]
-		print(url)
-		driver.get(url)
-		saveScreenshot(driver,url)
+		try:
+			url=url[:-1]
+			print(url)
+			driver.get(url)
+			saveScreenshot(driver,url)
+		except:
+			driver=webdriver.Chrome(chrome_options=options)
+			driver.set_window_size(1024,768)
+			traceback.print_exc()
+
+
 	driver.quit()
 if __name__=="__main__":
 	filename=sys.argv[-1]
