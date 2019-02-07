@@ -24,11 +24,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def saveScreenshot(driver,url):
 	imgName=url.split('//')[1].split('/')[0]
-	driver.save_screenshot('/home/abhiavk/git/Visual-Complexity-and-Colourfullness/Training/IndiaGov/'+imgName+'.png')
+	driver.save_screenshot('/home/abhiavk/git/Visual-Complexity-and-Colourfullness/Training/Webby18/'+imgName+'.png')
 def main(filename):
 	options 	= Options()
 	options.add_argument("--headless")
-
+	driver=webdriver.Chrome(chrome_options=options)
+	driver.set_window_size(1024,768)
 	urls		=open(filename,"r")
 	for url in urls:
 		try:

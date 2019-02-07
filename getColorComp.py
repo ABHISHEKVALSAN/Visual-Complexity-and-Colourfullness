@@ -16,14 +16,17 @@ def getColorfullness(image):
 	stdRoot = np.sqrt((rbStd ** 2) + (ybStd ** 2))
 	meanRoot = np.sqrt((rbMean ** 2) + (ybMean ** 2))
 	Colourfullness= stdRoot + (0.3 * meanRoot)
-	cv2.imwrite(str(int(Colourfullness)).zfill(3)+'.png',image)
 	return Colourfullness
-def main(filename):
+def main(path,filename):
 	image=cv2.imread(filename)
 	Colourfullness=getColorfullness(image)
+	path
+	imgName=str(int(Colourfullness)).zfill(3)+'p'+str(int((Colourfullness-int(Colourfullness))*1000)).zfill(3)+'.png'
+	cv2.imwrite(path+imgName,image)
 	Complexity=1#getComplexity(image)
 
 if __name__=="__main__":
-	filenames=list(paths.list_images('/home/abhiavk/git/Visual-Complexity-and-Colourfullness/Training/Webby18/'))
+	path='/home/abhiavk/git/Visual-Complexity-and-Colourfullness/Training/Webby18/'
+	filenames=list(paths.list_images(path))
 	for filename in filenames:
-		main(filename)
+		main(path,filename)
